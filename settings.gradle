@@ -3,11 +3,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {url 'https://jitpack.com'}
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "okkv"
 include ':app'
-include ':okkv-core'
 include ':okkv-sp'
 include ':okkv-mmkv'
+include ':okkv-core'
