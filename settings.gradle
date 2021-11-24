@@ -8,6 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "okkv"
 include ':app'
-include ':okkv'
+include ':okkv-core'
 include ':okkv-sp'
 include ':okkv-mmkv'

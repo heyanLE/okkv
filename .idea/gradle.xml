@@ -10,7 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/okkv" />
+            <option value="$PROJECT_DIR$/okkv-core" />
             <option value="$PROJECT_DIR$/okkv-mmkv" />
             <option value="$PROJECT_DIR$/okkv-sp" />
           </set>
