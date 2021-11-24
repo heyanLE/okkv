@@ -12,19 +12,19 @@ import java.lang.Exception
 class LogcatInterceptorChain: SimpleInterceptor() {
 
     override fun <T> onGet(okkvValue: OkkvValue<T>) {
-        Log.v("OKKV", "get ${okkvValue.get()} ==>")
+        Log.v("OKKV", "get ${okkvValue.key()} ==>")
     }
 
     override fun <T> onSet(okkvValue: OkkvValue<T>, value: T) {
-        Log.v("OKKV", "set ${okkvValue.get()} <== $value")
+        Log.v("OKKV", "set ${okkvValue.key()} <== $value")
     }
 
     override fun <T> onGetAfter(okkvValue: OkkvValue<T>, res: T) {
-        Log.v("OKKV", "get ${okkvValue.get()} ==> $res")
+        Log.v("OKKV", "get ${okkvValue.key()} ==> $res")
     }
 
     override fun <T> onSetAfter(okkvValue: OkkvValue<T>, value: T, res: Exception?) {
-        Log.v("OKKV", "set ${okkvValue.get()} <== $value ex: $res")
+        Log.v("OKKV", "set ${okkvValue.key()} <== $value ex: $res")
     }
 
 }
