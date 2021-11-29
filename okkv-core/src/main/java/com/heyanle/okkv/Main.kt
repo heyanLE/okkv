@@ -11,19 +11,5 @@ import java.util.*
  */
 
 fun main(){
-    val store = Proxy.newProxyInstance(Thread.currentThread().contextClassLoader, arrayOf(Store::class.java), object: InvocationHandler{
-        override fun invoke(proxy: Any?, method: Method?, args: Array<out Any>?): Any {
-            println("${method?.name} : ${Arrays.toString(args)}")
-            return ""
-        }
-    }) as Store
 
-
-
-    var k by okkv("s", "f")
-
-    Okkv.Builder().store(store).build().default()
-
-    println("k $k")
-    k = "f"
 }

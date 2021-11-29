@@ -10,11 +10,12 @@ import java.lang.Exception
 class OkkvImpl(
     private val interceptorChain: InterceptorChain,
     private val store: Store,
-    private val converter: Converter
+    private val converter: List<Converter>
 ) : Okkv {
 
-    override fun init() {
+    override fun init() : Okkv{
         store.init()
+        return this
     }
 
     override fun <T> getValue(key: String, defValue: T): OkkvValue<T> {
@@ -30,10 +31,25 @@ class OkkvImpl(
     }
 
     override fun <T> convertTo(obj: T, okkvValue: OkkvValue<T>): String? {
-        return converter.convertTo(obj, okkvValue)
+        converter.forEach {
+            runCatching {
+                it.convertTo(obj, okkvValue)?.let {
+                    return it
+                }
+            }
+
+        }
+        return null
     }
 
     override fun <T> convertFrom(string: String, okkvValue: OkkvValue<T>): T? {
-        return converter.convertFrom(string, okkvValue)
+        converter.forEach {
+            runCatching {
+                it.convertFrom(string, okkvValue)?.let {
+                    return it as T
+                }
+            }
+        }
+        return null
     }
 }

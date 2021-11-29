@@ -6,8 +6,8 @@ package com.heyanle.okkv
  */
 interface Converter {
 
-    fun <T> convertFrom (string: String, okkvValue: OkkvValue<T>) : T?
+    fun convertFrom (string: String, okkvValue: OkkvValue<*>) : Any?
 
-    fun <T> convertTo (obj: T, okkvValue: OkkvValue<T>) : String?
+    fun convertTo (obj: Any?, okkvValue: OkkvValue<*>) : String?
 
 }

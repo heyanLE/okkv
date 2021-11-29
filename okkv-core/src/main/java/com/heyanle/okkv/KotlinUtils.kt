@@ -10,10 +10,13 @@ import kotlin.reflect.KProperty
 class OkkvValueLazy<T>(
     private val key: String,
     private val def: T,
+    private val okkvFinder: ()->Okkv = {
+                                       DefaultOkkv.okkv?:throw NullPointerException("Please init first !")
+    },
 ) : OkkvValue<T>{
 
     private val proxy : OkkvValue<T> by lazy {
-        DefaultOkkv.okkv?.getValue(key, def) ?: throw NullPointerException("Please init first !")
+        okkvFinder().getValue(key, def)
     }
 
     override fun okkv(): Okkv {

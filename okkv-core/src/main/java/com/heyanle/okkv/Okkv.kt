@@ -14,6 +14,9 @@ fun <T> okkv(key: String, def: T): OkkvValue<T>{
     return OkkvValueLazy<T>(key, def)
 }
 
+
+
+
 object DefaultOkkv {
     var okkv: Okkv? = null
     fun def(okkv: Okkv){
@@ -25,7 +28,7 @@ interface Okkv {
 
     class Builder {
         var store: Store? = null
-        var converter : Converter? = null
+        var converters  = arrayListOf<Converter>()
         var interceptorChains = arrayListOf<InterceptorChain>()
         var cache: Boolean = false
         var catchingChain : BaseCatchingChain = SimpleCatchingChain()
@@ -45,8 +48,8 @@ interface Okkv {
             return this
         }
 
-        fun converter(converter: Converter): Builder {
-            this.converter = converter
+        fun addConverter(converter: Converter): Builder {
+            this.converters.add(converter)
             return this
         }
 
@@ -78,19 +81,11 @@ interface Okkv {
                 p.next(chain)
                 p = chain
             }
-            return OkkvImpl(head, st, converter?: object: Converter {
-                override fun <T> convertFrom(string: String, okkvValue: OkkvValue<T>): T? {
-                    return null
-                }
-
-                override fun <T> convertTo(obj: T, okkvValue: OkkvValue<T>): String? {
-                    return null
-                }
-            })
+            return OkkvImpl(head, st, converters)
         }
     }
 
-    fun init()
+    fun init(): Okkv
 
     fun <T> getValue(key: String, defValue: T): OkkvValue<T>
 
