@@ -5,7 +5,7 @@
 ```groovy
 repositories {
     // Other
-    maven {url 'https://jitpack.com'}
+    maven {url 'https://jitpack.io'}
 }
 ```
 
