@@ -10,6 +10,9 @@ import com.heyanle.okkv.mkkv.MMKVStore
 class OkkvApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        Okkv.Builder().store(MMKVStore(this)).build().default()
+        Okkv.Builder().store(MMKVStore(this)).build().init().default()
+
+        var s : Boolean by okkv("F", false)
+        s = true
     }
 }

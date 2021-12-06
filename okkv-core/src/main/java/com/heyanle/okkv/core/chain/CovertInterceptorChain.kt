@@ -13,8 +13,10 @@ class CovertInterceptorChain(
 ) : BaseInterceptorChain() {
 
     override fun <T> get(okkvValue: OkkvValue<T>): T? {
+        val s = okkvValue.defValue()
         when(okkvValue.defValue()){
-            is String, Long, Double, Int, Boolean, Float -> {
+
+            is String, is Long, is Double, is Int, is Boolean, is Float -> {
                 return next()?.get(okkvValue)
             }
             else -> {
@@ -26,8 +28,9 @@ class CovertInterceptorChain(
     }
 
     override fun <T> set(okkvValue: OkkvValue<T>, value: T): Exception? {
+        val s = okkvValue.defValue()
         when(okkvValue.defValue()){
-            is String, Long, Double, Int, Boolean, Float -> {
+            is String, is Long, is Double, is Int, is Boolean, is Float -> {
                 return next()?.set(okkvValue, value)
             }
             else -> {
