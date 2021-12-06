@@ -21,6 +21,7 @@ class LogcatInterceptorChain: SimpleInterceptor() {
 
     override fun <T> onGetAfter(okkvValue: OkkvValue<T>, res: T?) {
         Log.v("OKKV", "get ${okkvValue.key()} ==> $res")
+
     }
 
     override fun <T> onSetAfter(okkvValue: OkkvValue<T>, value: T, res: Exception?) {
