@@ -26,14 +26,24 @@ class CovertInterceptorChain(
     }
 
     override fun <T> set(okkvValue: OkkvValue<T>, value: T): Exception? {
-        val res = try {
-            okkvValue.okkv().convertTo(value, okkvValue)
-        }catch (e : Exception){
-            return e
-        } ?: return Exception("cover to error !")
-        val v = OkkvValueImpl(okkvValue.key(), okkvValue.okkv(), "")
-        next()?.set(v, res)
-        return null
+        when(okkvValue.defValue()){
+            is String, Long, Double, Int, Boolean, Float -> {
+                return next()?.set(okkvValue, value)
+            }
+            else -> {
+                val res = try {
+                    okkvValue.okkv().convertTo(value, okkvValue)
+                }catch (e : Exception){
+                    return e
+                } ?: return Exception("cover to error !")
+                val v = OkkvValueImpl(okkvValue.key(), okkvValue.okkv(), "")
+                next()?.set(v, res)
+                return null
+            }
+        }
+
+
+
 
     }
 }
