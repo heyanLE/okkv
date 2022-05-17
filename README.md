@@ -1,5 +1,8 @@
 ### OKKV —— 一个好用的数据持久化工具类
 
+[![](https://www.jitpack.io/v/heyanLE/okkv.svg)](https://www.jitpack.io/#heyanLE/okkv)
+
+
 ### Load
 
 ```groovy
@@ -118,7 +121,7 @@ Okkv.Builder()
 
 ### Covert
 
-当我们需要的类型不是基本类型时，可以通过 Converter 来序列化，在使用时，所有的 Converter 都会被调用，知道第一个不为空的结果出现
+当我们需要的类型不是基本类型时，可以通过 Converter 来序列化，在使用时，所有的 Converter 都会被调用，直到第一个不为空的结果出现
 
 ```kotlin
 Okkv.Builder()

@@ -3,6 +3,7 @@ package com.heyanle.okkv.core.chain
 import com.heyanle.okkv.OkkvValue
 import java.lang.Exception
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Created by HeYanLe on 2021/11/24 18:57.
@@ -10,12 +11,12 @@ import java.util.*
  */
 class CacheInterceptorChain : BaseInterceptorChain() {
 
-    private val hashMap = Collections.synchronizedMap(hashMapOf<String, Any>())
+    private val hashMap = ConcurrentHashMap<String, Any>()
 
     override fun <T> get(okkvValue: OkkvValue<T>): T? {
         if(hashMap.containsKey(okkvValue.key())){
             try {
-                return hashMap[okkvValue.key()] as T
+                return hashMap[okkvValue.key()] as T?
             }catch (e : Exception){
                 e.printStackTrace()
             }
@@ -30,7 +31,7 @@ class CacheInterceptorChain : BaseInterceptorChain() {
     override fun <T> set(okkvValue: OkkvValue<T>, value: T): Exception? {
         val res = next?.set(okkvValue, value)
         if(res == null){
-            hashMap[okkvValue.key()] = value
+            hashMap[okkvValue.key()] = value as Any
         }
         return res
     }

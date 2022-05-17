@@ -27,7 +27,7 @@ object DefaultOkkv {
 interface Okkv {
 
     class Builder {
-        var store: Store? = null
+        var store: Store? = MemoryStore()
         var converters  = arrayListOf<Converter>()
         var interceptorChains = arrayListOf<InterceptorChain>()
         var cache: Boolean = false
