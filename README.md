@@ -2,6 +2,13 @@
 
 [![](https://www.jitpack.io/v/heyanLE/okkv.svg)](https://www.jitpack.io/#heyanLE/okkv)
 
+### Latest
+
+[![](https://www.jitpack.io/v/heyanLE/okkv.svg)](https://www.jitpack.io/#heyanLE/okkv)
+
+* 1.1.7 2022/05/17  
+  更新 MemoryStore 并作为默认实现（直接存放内存）  
+  将 CacheInterceptorChain 的数据结构从 SynchronizedMap 更新为 ConcurrentHashMap （效率较高）
 
 ### Load
 
@@ -13,9 +20,9 @@ repositories {
 ```
 
 ```groovy
-implementation 'com.github.heyanLE.okkv:okkv-core:1.1.1' // 核心代码
-implementation 'com.github.heyanLE.okkv:okkv-sp:1.1.1' // 使用 SharedPreference 储存
-implementation 'com.github.heyanLE.okkv:okkv-mmkv:1.1.1' // 使用 MMKV 储存
+implementation 'com.github.heyanLE.okkv:okkv-core:1.1.7' // 核心代码
+implementation 'com.github.heyanLE.okkv:okkv-sp:1.1.7' // 使用 SharedPreference 储存
+implementation 'com.github.heyanLE.okkv:okkv-mmkv:1.1.7' // 使用 MMKV 储存
 ```
 
 ### Use
